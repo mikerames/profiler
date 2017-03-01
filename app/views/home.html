@@ -1,0 +1,38 @@
+
+<div class="container">
+	<div class="row row-content">
+		<div class="col-xs-12">
+			<div ng-if="!showPromotion">
+				<h3>{{message}}</h3>
+			</div>
+			<div class="media" ng-if="promotion">
+				<div class="media-list">
+					<div class="container">
+						<div class="row row-content">
+							<div class="col-xs-12">
+								<div ng-if="!showPromotion">
+									<h3>{{message}}</h3>
+								</div>
+								<div class="media" ng-if="promotion">
+									<div class="media-list">
+										<div class="media-left media-middle">
+											<img class="media-object img-thumbnail" ng-src={{promotion.image}} alt="promotion detail">
+										</div>
+										<div class="media-body">
+											<h2 class="media-heading">
+												{{promotion.name}}
+												<span class="label label-danger">{{promotion.label}}</span>
+												<span class="badge">{{promotion.price}}</span>
+											</h2>
+											<p>{{promotion.description}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
