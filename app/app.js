@@ -11,14 +11,15 @@ angular.module('confusionApp', ['ui.router','ngResource'])
                         templateUrl : 'views/header.html'
                     },
                     'content': {
-                        templateUrl : 'views/home.html',
-                        controller  : 'IndexController'
+                        templateUrl : 'views/home1.html'//,
+                        //controller  : 'IndexController'
                     },
                     'footer': {
                         templateUrl : 'views/footer.html'
                     }
                 }
             })
+
                     // route for the aboutus page
             .state('app.aboutus', {
                 url:'aboutus',
