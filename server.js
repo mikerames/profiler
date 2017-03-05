@@ -8,8 +8,8 @@ var morgan = require('morgan');               // HTTP request logger middleware 
 var bodyParser = require('body-parser');      // Node.js body parsing middleware
 var methodOverride = require('method-override'); // simulates DELETE and PUT (_method / app.post / app.put
 // configuration ===============================================================
-mongoose.connect(database.localUrl);            // Connect to local MongoDB instance
-//mongoose.connect(database.herokuUrl);         // Connect to remoteUrl MongoDB instance
+//mongoose.connect(database.localUrl);            // Connect to local MongoDB instance
+mongoose.connect(database.herokuUrl);         // Connect to remoteUrl MongoDB instance
 app.use(express.static('./app'));               // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                         // log every request to the console
 app.use(bodyParser.urlencoded({'extended': 'true'}));          // parse application/x-www-form-urlencoded
