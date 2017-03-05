@@ -1,0 +1,34 @@
+<!-- Profile -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<img class="img-rounded" alt="Carousel Bootstrap First" src={{profile.main_photo}} width="380px" height="380px" />
+		</div>
+		<div class="col-md-8">
+			<h1>{{profile.name}}</h1>
+			<h6><span class="label label-info">{{profile.profession}}</span></h6>
+			<hr>
+			<p id="demo"><b>Birthday: </b>{{profile.birthday}}</p>
+			<p><b>Location: </b>{{profile.location}}</p>
+			<p><b>Achievements: </b>{{profile.achievements}}</p>
+			<p><b>Movies: </b>{{profile.movies}}</p>
+			<p><b>Rating: </b>{{profile.rating}}</p>
+			<p>{{profile.description}}</p>
+		</div>
+	</div>
+	<hr>
+	</br>
+	<div class="row">
+		<div class="col-xs-6 col-md-2" ng-repeat="photos in profile.photos track by $index">
+			<a href="#" class="thumbnail">
+				<img src={{profile.photos[$index]}} alt="...">
+			</a>
+		</div>
+	</div>
+	</br>
+	<hr>
+	<footer>
+		<p>&copy; 2016 Company, Inc.</p>
+	</footer>
+</div>
+<!-- /container -->

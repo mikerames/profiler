@@ -5,6 +5,17 @@ angular.module('confusionApp')
 .constant("baseURL","http://localhost:8081/")
 //.constant("baseURL","https://shielded-ravine-55061.herokuapp.com/")
 
+.service('profilesFactory', ['$resource', 'baseURL', function($resource,baseURL) {
+  this.getProfiles = function(){
+      return $resource(baseURL+"api/profiles/:id",null,{'update':{method:'PUT' }});
+  };
+/*
+  this.getProfile = function(){
+      return $resource(baseURL+"api/profiles/:id",null,{'update':{method:'PUT' }});
+  };
+*/
+}])
+
 
 .service('menuFactory', ['$resource', 'baseURL', function($resource,baseURL) {
   this.getDishes = function(){
@@ -14,13 +25,13 @@ angular.module('confusionApp')
   this.getPromotions = function(){
       return $resource(baseURL+"api/promotions/:id",null,{'update':{method:'PUT' }});
   };
-
+/*
   this.getDish = function (index) {
       return $http.get(baseURL+"dishes/"+index);
 
   };
-
-}]);
+*/
+}])
 
 /*	.factory('Todos', ['$http',function($http) {
 		return {

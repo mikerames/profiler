@@ -11,8 +11,8 @@ angular.module('confusionApp', ['ui.router','ngResource'])
                         templateUrl : 'views/header.html'
                     },
                     'content': {
-                        templateUrl : 'views/home1.html'//,
-                        //controller  : 'IndexController'
+                        templateUrl : 'views/home.html',
+                        controller  : 'IndexController'
                     },
                     'footer': {
                         templateUrl : 'views/footer.html'
@@ -20,7 +20,28 @@ angular.module('confusionApp', ['ui.router','ngResource'])
                 }
             })
 
-                    // route for the aboutus page
+            .state('app.profiles', {
+                url:'profiles',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/profiles.html',
+                        controller  : 'ProfilesCtrl'
+                    }
+                }
+            })
+
+            // route for the dishdetail page
+            .state('app.profiledetails', {
+                url: 'profiles/:id',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/profiledetails.html',
+                        controller  : 'ProfileCtrl'
+                   }
+                }
+            })
+
+            // route for the aboutus page
             .state('app.aboutus', {
                 url:'aboutus',
                 views: {

@@ -3,6 +3,17 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Todo = require('./models/promotions');
 var Dishes = require('./models/dishes');
+var Profiles = require('./models/profiles');
+
+function getProfiles(res) {
+    Profiles.find(function (err, post) {
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            res.send(err);
+        }
+        res.json(post); // return all todos in JSON format
+    });
+};
 
 
 function getPromotions(res) {
@@ -15,32 +26,49 @@ function getPromotions(res) {
     });
 };
 
-
+/*
 function getPromotionsById(res) {
-console.log('getPromotionsById');
+    console.log('getPromotionsById');
 
-  //Todo.findById('58b3694461296a7cfc7ab739', function (err, post) {
-    Todo.findById('58b74d2cf36d281facb7c53e', function (err, post) {      
-    if (err) return next(err);
-    res.json(post);
-  });
-    
-}
+    //Todo.findById('58b3694461296a7cfc7ab739', function (err, post) {
+    Todo.findById('58b74d2cf36d281facb7c53e', function (err, post) {
+        if (err) return next(err);
+        res.json(post);
+    });
+};
+*/
+
 
 //middleware
 module.exports = function (app) {
 
     // api ---------------------------------------------------------------------
-    
-   
-    
-    // get all todos
-    app.get('/api/dishes/', function (req, res) {
-        // use mongoose to get all todos in the database
-        getPromotions(res);
+
+    //get profile
+    app.get('/api/profiles/:id', function (req, res) {
+        Profiles.findById(req.params.id, function (err, post) {
+            console.log(req.params.id);
+            if (err) return next(err);
+            res.json(post);
+        });
     });
 
- app.get('/api/dishes/:id', function (req, res) {
+// get all profiles
+app.get('/api/profiles/', function (req, res) {
+    // use mongoose to get all profiles in the database
+    getProfiles(res);
+});
+
+
+// get all todos
+app.get('/api/dishes/', function (req, res) {
+    // use mongoose to get all todos in the database
+    getPromotions(res);
+});
+
+
+
+    app.get('/api/dishes/:id', function (req, res) {
         Dishes.findById(req.params.id, function (err, post) {
 
             console.log(req.params.id);
@@ -50,12 +78,12 @@ module.exports = function (app) {
         });
     });
 
-app.get('/api/promotions/:id', function (req, res) {
-    Todo.findById(req.params.id, function (err, post) {
-        if (err) return next(err);
-        res.json(post);
+    app.get('/api/promotions/:id', function (req, res) {
+        Todo.findById(req.params.id, function (err, post) {
+            if (err) return next(err);
+            res.json(post);
+        });
     });
-});
 
 
     // create todo and send back all todos after creation
