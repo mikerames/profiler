@@ -2,8 +2,8 @@
 angular.module('confusionApp')
 
 
-//.constant("baseURL","http://localhost:8081/")
-.constant("baseURL","https://enigmatic-citadel-86026.herokuapp.com/")
+.constant("baseURL","http://localhost:8081/")
+//.constant("baseURL","https://enigmatic-citadel-86026.herokuapp.com/")
 
 .service('profilesFactory', ['$resource', 'baseURL', function($resource,baseURL) {
   this.getProfiles = function(){
