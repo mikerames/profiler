@@ -20,6 +20,56 @@ angular.module('confusionApp', ['ui.router','ngResource'])
                 }
             })
 
+            .state('app.tst', {
+                url:'tst',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/tst.html',
+                        controller  : ''
+                    }
+                }
+            })
+
+            .state('app.index_login', {
+                url:'/index_login',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/index_login.html',
+                        controller  : ''
+                    }
+                }
+            })
+
+            .state('app.login', {
+                url:'login',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/login.html',
+                        controller  : ''
+                    }
+                }
+            })
+
+            .state('app.signup', {
+                url:'signup',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/signup.html',
+                        controller  : ''
+                    }
+                }
+            })
+
+            .state('app.profile', {
+                url:'profile',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/profiles.html',
+                        controller  : 'ProfilesCtrl'
+                    }
+                }
+            })
+
             .state('app.profiles', {
                 url:'profiles',
                 views: {

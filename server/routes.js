@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+//var router = express.Router();
 var mongoose = require('mongoose');
 var Todo = require('./models/promotions');
 var Dishes = require('./models/dishes');
@@ -40,7 +40,7 @@ function getPromotionsById(res) {
 
 
 //middleware
-module.exports = function (app) {
+module.exports = function (app, passport) {
 
     // api ---------------------------------------------------------------------
 
@@ -121,4 +121,85 @@ app.get('/api/dishes/', function (req, res) {
         console.log(__dirname);
         res.sendFile(__dirname + '/app/index.html'); // load the single view file (angular will handle the page changes on the front-end)
     });
+
+//authentication
+
+
+app.get('/index_login', function(req, res) {
+		res.render('/app/views/index_login.html'); // load the index.ejs file
+	});
+
+	// =====================================
+	// LOGIN ===============================
+	// =====================================
+	// show the login form
+	app.get('/login', function(req, res) {
+
+		// render the page and pass in any flash data if it exists
+		res.render('login.html', { message: req.flash('loginMessage') });
+	});
+
+	// process the login form
+	app.post('/login', passport.authenticate('local-login', {
+		successRedirect : '/#/tst', // redirect to the secure profile section
+		failureRedirect : '/login', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+	}));
+
+	// =====================================
+	// SIGNUP ==============================
+	// =====================================
+	// show the signup form
+	app.get('/signup', function(req, res) {
+
+		// render the page and pass in any flash data if it exists
+		res.render('/app/views/signup.html', { message: req.flash('signupMessage') });
+	});
+
+	// process the signup form
+	app.post('/signup', passport.authenticate('local-signup', {
+		//successRedirect : '/profile', // redirect to the secure profile section
+        successRedirect : '/views/index_login.html', // redirect to the secure profile section
+		failureRedirect : '/signup', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+	}));
+
+	// =====================================
+	// PROFILE SECTION =========================
+	// =====================================
+	// we will want this protected so you have to be logged in to visit
+	// we will use route middleware to verify this (the isLoggedIn function)
+	app.get('/profile', isLoggedIn, function(req, res) {
+		res.render('/views/profiles.html', {
+			user : req.user // get the user out of session and pass to template
+		});
+	});
+
+	app.get('/tst', isLoggedIn, function(req, res) {
+		res.render('/views/tst.html', {
+			user : req.user // get the user out of session and pass to template
+		});
+	});
+
+	// =====================================
+	// LOGOUT ==============================
+	// =====================================
+	app.get('/logout', function(req, res) {
+		req.logout();
+		res.redirect('/');
+	});
 };
+
+// route middleware to make sure
+function isLoggedIn(req, res, next) {
+
+	// if user is authenticated in the session, carry on
+	if (req.isAuthenticated())
+		return next();
+
+	// if they aren't redirect them to the home page
+	res.redirect('/');
+};
+
+
+
